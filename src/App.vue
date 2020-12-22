@@ -37,6 +37,23 @@ export default {
       mail: 'coldrabbit48@example.com',
       mainImg: '/img/70.0d02ec28.jpg'
     }
+  },
+  methods: {
+    getUserData() {
+      this.axios.get('http://37.77.104.246/users/getrandom.php')
+        .then((response) => {
+          let arr = response['data'];
+          this.phone = arr['cellPhone'];
+          this.name = arr['firstName'] + " " + arr['lastName'];
+          this.nick = arr['gender'];
+          this.locationU = arr['country'] + ', ' + arr['city'] + ', ' + arr['street'] + ', ' + arr['houseNumber'];
+          this.mail = arr['email'];
+          this.mainImg = arr['img'];
+        });
+    }
+  },
+  mounted() {
+    this.getUserData()
   }
 }
 </script>
